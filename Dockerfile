@@ -14,7 +14,7 @@ RUN pip install -r requirements.txt
 COPY src /app
 
 # Exposing the http server port
-EXPOSE 8000
+EXPOSE 8080
 
 # Command to execute as the Docker starts
 CMD [ "python", "main.py" ]

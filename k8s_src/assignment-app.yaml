@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: assignment-app
+  name: assignment-app
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: assignment-app
+  template:
+    metadata:
+      labels:
+        run: assignment-app
+    spec:
+      containers:
+      - image: spatrayuni/assignment-app
+        name: assignment-app
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+        livenessProbe:
+          exec:
+            command:
+            - curl
+            - http://localhost:8080
+          initialDelaySeconds: 10
+          periodSeconds: 3
